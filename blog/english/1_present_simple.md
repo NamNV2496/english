@@ -164,7 +164,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 1 : The earth_( go) around the sun.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <div style="color: green;">
+  <div style="color: blue;">
   Dịch: Trái đất quay quanh mặt trời.
   
   Đáp án: **go => `goes`**
@@ -177,7 +177,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 2 : Angela usually_____(leave) for work at 8:00 A.M.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào trạng từ “usually” thì động từ trong câu phải chia thì hiện tại đơn.
 
   ĐÁP ÁN: **leave => `leaves`.**
@@ -189,7 +189,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 3 : Liz_____(get up) at 6 o’clock every morning.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào: "every morning" là dấu hiệu nhận biết thì hiện tại đơn.
 
   Đáp án: **`gets up`.**
@@ -201,7 +201,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 4 : In the summer, John often_____(play) tennis once or twice a week.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào trạng từ “often” thì động từ trong câu phải chia thì hiện tại đơn.
   
   Đáp án: **play => `plays`.**
@@ -213,7 +213,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 5 : What time you usually_____(get) home after work?
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào trạng từ “usually” thì động từ trong câu phải chia thì hiện tại đơn. Đây là câu hỏi nên đảo trợ động từ lên trước chủ ngữ.
 
   ĐÁP ÁN: **`do you usually get`.**
@@ -225,7 +225,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 6 : The swimming pool_____(open) at 9:00 and_____(close) at 6:30 every day.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào cách dùng của thì hiện tại đơn: “nói về lịch trình hoặc thời gian biểu” thì động từ trong câu phải chia thì hiện tại đơn.
 
   => Hai động từ cùng có chung chủ ngữ là “the swimming pool” - danh từ số ít nên động từ cần chia số ít.
@@ -239,7 +239,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 7 : Every year I_____(visit) Britain to improve my English.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào từ "every year" là dấu hiệu nhận biết thì hiện tại đơn.
 
   Chủ ngữ “I”- danh từ ngôi thứ nhất => động từ chia số nhiều
@@ -251,7 +251,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 8 : In the United State, elementary education is compulsory. All children _____ (study) six years of elementary school.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào cách dùng của thì hiện tại đơn: diễn tả những điều luôn đúng thì động từ trong câu phải chia thì hiện tại đơn.
 
   ĐÁP ÁN: **`study`**
@@ -263,7 +263,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 9 : I_____(not like) feel going to the library to study this afternoon.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào cách dùng của thì hiện tại đơn: diển tả quan điểm, cảm giác hay suy nghĩ của người nói.
 
   ĐÁP ÁN: **`don’t feel like`**
@@ -275,7 +275,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 10 : American people usually_____(have) their biggest meal in the evening.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào trạng từ “usually” thì động từ trong câu phải chia thì hiện tại đơn.
 
   ĐÁP ÁN: **`have`**
@@ -287,7 +287,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 11 : - Can you tell me when the train for HCM city_____(leave)? - In fifteen minutes. At 7.05.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào cách dùng của thì hiện tại đơn: “nói về lịch trình hoặc thời gian biểu” thì động từ trong câu phải chia thì hiện tại đơn.
 
   ĐÁP ÁN: leave => **`leaves`**
@@ -299,7 +299,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 12 : Of course, you are Lisa, aren’t you? I_____(recognize) you now.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Tạm dịch: Dĩ nhiên, bạn là Lisa phải không? Bây giờ tôi nhận ra bạn rồi.
 
   Căn cứ vào trạng từ " now" => chia thì hiện tại tiếp diễn. Tuy nhiên, động từ “recognize” trong trường hợp này `chỉ nhận thức` nên không chia thì tiếp diễn nên ta chọn chia ở thì hiện tại đơn.
@@ -311,7 +311,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 13 : I can see from what you say that your mornings are very busy! But what you (do)_____in the afternoons?
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào ngữ cảnh của câu thì động từ trong câu phải chia thì hiện tại đơn.
 
   Chú ý: Đây là câu hỏi nên đảo trợ động từ lên trước chủ ngữ.
@@ -325,7 +325,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### Question 14 : Before our director_____(come back), I_____(want) to remind everyone that we should not use the internet on personal purposes.
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào cách hợp thì với mệnh đề trạng ngữ chỉ thời gian: “Trong mệnh đề trạng ngữ chỉ thời gian ta dùng thì hiện tại đơn cho dù muốn diễn đạt hành động chưa xảy ra”. Trong ngữ cảnh trên, ông giám đốc chưa quay trở lại, nhưng vì mệnh đề này là mệnh đề trạng ngữ chỉ thời gian nên ta không dùng thì tương lai.
 
   Đáp án: **`comes back` - `want`**
@@ -339,7 +339,7 @@ _VD2:_ My mother goes to the supermarket three times a week (Mẹ tôi đi chợ
 ### - Certainly
 <details>
   <summary><span style="color: red;">Answer</span></summary>
-  <span style="color: green;">
+  <span style="color: blue;">
   Căn cứ vào trạng từ “always” thì động từ trong câu phải chia thì hiện tại đơn. Tuy nhiên trạng từ “always” có thể dùng với thì hiện tại tiếp diễn để nói về sự phàn nàn. Nhưng trong trường hợp này “always” đi với thì hiện tại đơn để diễn đạt sự “thường xuyên lặp đi lặp lại”.
 
   Chú ý: Vế hai là câu hỏi nên đảo trợ động từ lên trước chủ ngữ. Động từ “want” không chia thể tiếp diễn nên ta chia thì hiện tại đơn.

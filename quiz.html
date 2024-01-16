@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/blog/icon/icon.jpg">
+    <title>Quiz App</title>
+    <!-- Include the SheetJS library -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        #quiz-container {
+          position: relative;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+        }
+
+        #question-container {
+            position: relative;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        #next-question {
+            right: 0px;;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        #an-answer {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Adjustments for radio buttons and labels */
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:disabled {
+            background-color: #b0b0b0;
+            cursor: not-allowed;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        #next-question-btn {
+            position: absolute;
+            /* bottom: 10px; */
+            right: 10px;
+        }
+
+        #home-btn {
+          position: absolute;
+            /* bottom: 10px; */
+            left: 10%;
+            top: 30px;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+  <a href="index.html" id="home-btn"> HOME </a>
+  <input type="file" id="excel-file-input" accept=".xlsx, .xls" style="display: none;"/>
+
+  <div id="quiz-container">
+      <div id="score">Correct: 0, Incorrect: 0 / Total: </div>
+      <div id="question-container"></div>
+      <form id="answers-form">
+          <!-- <label>Select your answer:</label><br> -->
+          <!-- Radio buttons for each answer option -->
+          <div id="an-answer">
+            <input type="radio" name="answer" value="A" id="optionA">
+            <label for="optionA">A</label>
+          </div>
+          <div id="an-answer">
+            <input type="radio" name="answer" value="B" id="optionB">
+            <label for="optionB">B</label>
+          </div>
+          <div id="an-answer">
+            <input type="radio" name="answer" value="C" id="optionC">
+            <label for="optionC">C</label>
+          </div>
+          <div id="an-answer">
+            <input type="radio" name="answer" value="D" id="optionD">
+            <label for="optionD">D</label>
+          </div>
+      </form>
+      <button onclick="checkAnswer()" id="check-answer-btn">Check Answer</button>
+      <p id="description"></p>
+      <button onclick="loadNextQuestion()" id="next-question-btn">Next Question</button>
+  </div>
+
+  <script>
+      var sheetNumber;
+      var quizData = [["question", "A", "B", "C", "D", "answer", "reason"]];
+      var displayQuestion = [1, ];
+
+      var currentQuestionIndex = 1; // Start from the second row (skipping the header)
+      var correctCount = 0;
+      var incorrectCount = 0;
+      var questionContainer = document.getElementById("question-container");
+      var descriptionContainer = document.getElementById("description");
+      var scoreContainer = document.getElementById("score");
+      var checkAnswerBtn = document.getElementById("check-answer-btn");
+      var checkNextBtn = document.getElementById("next-question-btn");
+
+      document.getElementById("excel-file-input").addEventListener("change", handleFile);
+
+      function getSheetNumber() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const greetingValue = urlParams.get('greeting');
+          console.log("param value: "+ urlParams.get('quiz'));
+          sheetNumber = urlParams.get('quiz');
+      }
+
+      function handleFile() {
+        // Relative path to the file
+        var filePath = "./file/exercise.xlsx";
+        // Fetch the content of the file
+        console.log("quizValue" + sheetNumber);
+        fetch(filePath)
+          .then(response => response.blob())
+          .then(blob => {
+              // Create a File object from the Blob
+              var file = new File([blob], "exercise.xlsx");
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  var data = new Uint8Array(e.target.result);
+                  var workbook = XLSX.read(data, { type: "array" });
+
+                  // Assume the first sheet is the one containing quiz data
+                  var firstSheet = workbook.Sheets[workbook.SheetNames[sheetNumber]];
+
+                  // Convert sheet data to JSON format
+                  quizDataJson = XLSX.utils.sheet_to_json(firstSheet);
+
+                  // Convert quizData to the desired format
+                  for (var i = 0; i < quizDataJson.length; i++) {
+                      var originalRow = quizDataJson[i];
+                      var formattedRow = [
+                          originalRow.question,
+                          originalRow.A,
+                          originalRow.B,
+                          originalRow.C,
+                          originalRow.D,
+                          originalRow.answer,
+                          originalRow.reason
+                      ];
+                      quizData.push(formattedRow);
+                  }
+
+                  console.log(quizData);
+
+                  // Load the quiz
+                  loadQuiz();
+              };
+              reader.readAsArrayBuffer(file);
+          }).catch(error => console.error("Error fetching the file:", error));
+      }
+
+      function loadQuiz() {
+        
+        // console.log("call loadQuiz: " + quizData[currentQuestionIndex]);
+          // Load the question and answers
+          var currentQuestion = quizData[currentQuestionIndex];
+          var questionHTML = "<p> Question " + currentQuestionIndex + ": </p><p>" + currentQuestion[0] + "</p>";
+          questionContainer.innerHTML = questionHTML;
+
+          // Set labels for each radio button
+          for (var i = 1; i <= 4; i++) {
+            
+              var label = document.querySelector(`label[for=option${String.fromCharCode(64 + i)}]`);
+              label.textContent = String.fromCharCode(64 + i) + " - " + currentQuestion[i];
+          }
+
+          // Enable the "Check Answer" button
+          checkAnswerBtn.disabled = false;
+          checkNextBtn.disabled = true;
+      }
+
+      function checkAnswer() {
+          var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+          if (!selectedAnswer) {
+              alert("Please select an answer.");
+              return;
+          }
+
+          // Disable the "Check Answer" button after it has been pressed
+          checkAnswerBtn.disabled = true;
+
+          var correctAnswer = quizData[currentQuestionIndex][5];
+          var description = quizData[currentQuestionIndex][6];
+          var formattedDescription = formatDescription(description);
+
+          if (selectedAnswer.value === correctAnswer) {
+              descriptionContainer.innerHTML = "Correct! <p></p>" + formattedDescription ;
+              descriptionContainer.className = "correct";
+              correctCount++;
+          } else {
+              descriptionContainer.innerHTML = "Incorrect. <p></p>" + formattedDescription ;
+              descriptionContainer.className = "incorrect";
+              incorrectCount++;
+          }
+
+          updateScore();
+          checkNextBtn.disabled = false;
+      }
+
+      function formatDescription(description) {
+          // Split the description by '-' and join with <br> for new lines
+          return description.split('-').join('<br>');
+      }
+
+      function updateScore() {
+          scoreContainer.textContent = "Correct: " + correctCount + ", Incorrect: " + incorrectCount + "/ Total: " + (quizData.length -1);
+      }
+
+      function loadNextQuestion() {
+          // Reset description and move to the next question
+          descriptionContainer.innerHTML = "";
+          descriptionContainer.className = ""; // Reset the class
+          var answersForm = document.getElementById("answers-form");
+          answersForm.reset(); // Reset radio button selection
+
+          console.log("Check data: " + displayQuestion.length + " " + (quizData.length-1) + " key " + currentQuestionIndex + " is exist: " + displayQuestion.includes(currentQuestionIndex))
+          while (displayQuestion.length < quizData.length -1 && displayQuestion.includes(currentQuestionIndex)) {
+
+              currentQuestionIndex = Math.floor(Math.random() * (quizData.length - 1) + 1)
+          }
+            
+          console.log("Push data to list: " + currentQuestionIndex);
+            displayQuestion.push(currentQuestionIndex);
+
+          // Check if there are more questions
+          if (displayQuestion.length < quizData.length) {
+            loadQuiz();
+          } else {
+              alert(scoreContainer.textContent);
+          }
+      }
+      // Initial load
+        getSheetNumber();
+        handleFile();
+  </script>
+
+</body>
+</html>
