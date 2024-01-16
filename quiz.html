@@ -202,12 +202,11 @@
         // console.log("call loadQuiz: " + quizData[currentQuestionIndex]);
           // Load the question and answers
           var currentQuestion = quizData[currentQuestionIndex];
-          var questionHTML = "<p> Question " + currentQuestionIndex + ": </p><p>" + currentQuestion[0] + "</p>";
+          var questionHTML = "<p> Question " + (displayQuestion.length) + ": </p><p>" + formatDescription(currentQuestion[0]) + "</p>";
           questionContainer.innerHTML = questionHTML;
 
           // Set labels for each radio button
           for (var i = 1; i <= 4; i++) {
-            
               var label = document.querySelector(`label[for=option${String.fromCharCode(64 + i)}]`);
               label.textContent = String.fromCharCode(64 + i) + " - " + currentQuestion[i];
           }
@@ -268,7 +267,7 @@
           }
             
           console.log("Push data to list: " + currentQuestionIndex);
-            displayQuestion.push(currentQuestionIndex);
+          displayQuestion.push(currentQuestionIndex);
 
           // Check if there are more questions
           if (displayQuestion.length < quizData.length) {
