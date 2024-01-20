@@ -127,8 +127,11 @@
                       ];
                       quizData.push(formattedRow);
                   }
-                  console.log(quizData);
-
+                  // console.log(quizData);
+                  if (quizData.length < questionNumber) {
+                    questionNumber = quizData.length - 1;
+                    console.log("update questionNumber: " + questionNumber);
+                  }
                   // Load the quiz
                   currentQuestionIndex = Math.floor(Math.random() * (quizData.length - 1) + 1);
                   displayQuestion.push(currentQuestionIndex);
@@ -143,7 +146,7 @@
         // console.log("call loadQuiz: " + quizData[currentQuestionIndex]);
           // Load the question and answers
           var currentQuestion = quizData[currentQuestionIndex];
-          var questionHTML = "<p> Question " + (displayQuestion.length + 1) + ": </p><p>" + formatDescription(currentQuestion[0]) + "</p>";
+          var questionHTML = "<p> Question " + displayQuestion.length + ": </p><p>" + formatDescription(currentQuestion[0]) + "</p>";
           questionContainer.innerHTML = questionHTML;
 
           // Set labels for each radio button
@@ -201,7 +204,7 @@
 
       function formatDescription(description) {
           // Split the description by '-' and join with <br> for new lines
-          return description.split('-').join('<br>-').split('*').join('<br>*');
+          return description.split('-').join('<br>-').split('*').join('<br>*').split('–').join('<br>-');
       }
 
       function updateScore() {
@@ -230,7 +233,7 @@
 
           displayQuestion.push(currentQuestionIndex);
           // Check if there are more questions
-          if (displayQuestion.length < questionNumber && displayQuestion.length <= quizData.length - 1) {
+          if (displayQuestion.length <= questionNumber && displayQuestion.length <= quizData.length - 1) {
             loadQuiz();
           } else {
               alert(scoreContainer.textContent);

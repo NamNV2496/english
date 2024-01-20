@@ -156,3 +156,8 @@ button:disabled {
     position: block;
     right: 0%;
 }
+
+
+#description {
+  line-height: 25px;
+}
