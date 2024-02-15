@@ -17,7 +17,7 @@
   <input type="file" id="excel-file-input" accept=".xlsx, .xls" style="display: none;"/>
 
   <div id="quiz-container">
-      <div id="score">Correct: 0, Incorrect: 0 / Total: </div>
+      <div id="score">Correct: 0, Incorrect: 0 / Total: 10 </div>
       <div id="tenQuestionDiv">
         <label for="nameMode">10 questions</label>
         <!-- Rounded switch -->
@@ -83,6 +83,7 @@
             }
             labelQuestionNumber.style.fontWeight = 'bold';
             labelQuestionNumber.textContent = questionNumber + " questions";
+            updateScore();
         });
 
 
@@ -204,7 +205,10 @@
 
       function formatDescription(description) {
           // Split the description by '-' and join with <br> for new lines
-          return description.split('-').join('<br>-').split('*').join('<br>*').split('–').join('<br>-');
+          return description.split('-').join('<br>-') // - char
+                            .split('*').join('<br>*') // * char
+                            .split('–').join('<br>-') // – char
+                            .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
       }
 
       function updateScore() {
