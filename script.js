@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Set the text to be read
       speech.text = englishWord;
   
+      // speech.rate = 0.75;
+
       // Use the default voice
       speech.lang = 'en-US';
   

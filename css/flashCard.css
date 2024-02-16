@@ -61,10 +61,6 @@ body {
     margin-top: 20px;
 }
 
-#next-question-btn {
-    position: absolute;
-    right: 20px;
-}
 
 button {
     padding-top: 30px;
@@ -84,8 +80,9 @@ button {
         position: absolute;
         right: 30%;
     }
+
     #search-input {
-        width: 300px;
+        width: 80%;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -220,29 +217,67 @@ button {
 
 
 
-#read-button {
-    position: absolute;
-    left: 25%;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
+@media only screen and (max-width: 991px) {
+    #next-question-btn {
+        position: absolute;
+        top: 70%;
+        right: 25%;
+    }
+
+
+    #read-button {
+        position: absolute;
+        background-color:rgb(87, 167, 233);
+        top: 70%;
+        left: 25%;
+    }
 }
 
-#read-button.playing::after {
-    content: "\f028"; /* Unicode for speaker icon */
+@media only screen and (min-width: 991px) {
+    #next-question-btn {
+        position: absolute;
+        top: 70%;
+        right: 35%;
+    }
+    
+    
+    #read-button {
+        position: absolute;
+        background-color: rgb(87, 167, 233);
+        top: 70%;
+        left: 35%;
+    }
 }
 
-#read-button.stopped::after {
-    content: "\f026"; /* Unicode for pause icon */
+
+@media only screen and (max-width: 750px) {
+    #next-question-btn {
+        position: absolute;
+        top: 70%;
+        right: 10%;
+    }
+    
+    
+    #read-button {
+        position: absolute;
+        background-color: rgb(87, 167, 233);
+        top: 70%;
+        left: 10%;
+    }
 }
 
-/* Assuming you're using Font Awesome for the icons */
-#read-button::after {
-    font-family: "Font Awesome 5 Free";
+@media only screen and (max-width: 360px) {
+    #next-question-btn {
+        position: absolute;
+        top: 85%;
+        right: 10%;
+    }
+    
+    
+    #read-button {
+        position: absolute;
+        background-color: rgb(87, 167, 233);
+        top: 85%;
+        left: 10%;
+    }
 }
-
-
-
-
-
