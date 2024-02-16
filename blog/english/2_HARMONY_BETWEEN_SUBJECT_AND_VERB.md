@@ -50,18 +50,21 @@ người.)
 
 ## Quy tắc 6: Danh từ kết thúc là “s” nhưng dùng `số ít`
 
-
 ### Danh từ tên môn học:
+
 ```
-Physics (Vật lí), Mathematics (Toán), Economics (Kinh tế học), Linguistics (Ngôn ngữ
-học), Politics (Chính trị học), Genetics (Di truyền học), Phonetics (Ngữ âm học)....
+Physics (Vật lí), Mathematics (Toán), Economics (Kinh tế học), Linguistics (Ngôn ngữ học), Politics (Chính trị học), Genetics (Di truyền học), Phonetics (Ngữ âm học)....
 ```
+
 ###  Danh từ tên môn thể thao:
 Athletics (Điền kinh), Billiards (Bi-da), Checkers (Cờ đam), Darts (Phóng lao trong nhà),
 Dominoes (Đô mi nô)...
+
 ### Danh từ tên các căn bệnh:
 - Measles (sởi), Mumps (quai bị), Diabetes (tiểu đường), Rabies (bệnh dại), Shingles (bệnh lở mình), Rickets (còi xương)....
+
 ### 1 cụm danh từ bao gồm tập hợp của nhiều đơn vị nhỏ:
+
 - Cụm danh từ chỉ kích thước, đo lường: Two pounds is…. (2 cân)
 - Cụm danh từ chỉ khoảng cách: Ten miles is (10 dặm)
 - Cụm danh từ chỉ thời gian: Ten years is … (10 năm)
@@ -104,8 +107,10 @@ Hai danh từ nối với nhau bằng "of" thì chia theo danh từ phía trư�
 - `The study` of how living things work `is` called philosophy. (Chia theo "study") (Nghiên cứu về cách thức hoạt động của sinh vật được gọi là triết học)
 - `Some` of the students `are` late for class. (Nhìn trước chữ "of" gặp "some" nên chia theo chữ phía sau là students) (Một số học sinh đến lớp muộn.)
 - `Most` of the water `is` polluted, (phía trước là most nên chia theo danh từ chính đứng sau là water)
+
 ### Lưu ý:
 Nếu các từ trên đứng một mình thì phải suy nghĩ xem nó là đại diện cho danh từ nào, nếu danh từ đó đếm được thì dùng số nhiều, ngược lại dùng số ít.
+
 **Ví dụ:**
 - The majority think that... (đa số nghĩ rằng...): ta suy ra rằng để "suy nghĩ" được phải là danh từ đếm được (người) → dùng số nhiều.
 
@@ -139,8 +144,8 @@ There is a book and two pens on the table, (vẫn chia theo "a book")
 **Ví dụ:**
 One of the girls `who` go out `is` very good. (Chia theo "the girls")
 
-## Quy tắc 16: Gặp các đại từ sở hữu như: mine, his, hers, yours; ours, theirs thì phải xem
-cái gì của người đó và nó là số ít hay số nhiều.
+## Quy tắc 16: Gặp các đại từ sở hữu như: mine, his, hers, yours; ours, theirs thì phải xem cái gì của người đó và nó là số ít hay số nhiều.
+
 **Ví dụ:**
 Give me your scissors. `Mine` `are` very old. (Ta suy ra là của tôi ở đây ý nói scissors của tôi: số nhiều → chia động từ ở số nhiều: Mine are very old.)
 
@@ -163,7 +168,7 @@ làm chủ từ, thì chia động từ số ít.
 - The scissors `are` very sharp. (Cái kéo rất sắc bén.)
 - `A pair of` scissors `was` left on the table. (Cái kéo được người ta để lại trên bàn.)
 
-## Quy tắc 18: Với đại từ bất định thì động từ theo sau chia ở số ít
+## Quy tắc 18: Với đại từ bất định thì động từ theo sau chia ở `số ít`
 Đại từ bất định là những từ sau: Some one, any one, no one, every one, something, anything, everything, nothing,...
 **Ví dụ:**
 - Everything `seems` perfect. (Mọi thứ dường như hoàn hảo.)
@@ -174,25 +179,18 @@ Nếu sau “no" là danh từ số ít thì động từ chia số ít.
 Nếu sau "no" là danh từ số nhiều thì động từ chia số nhiều.
 **Ví dụ:**
 
--No money has been invested for this company for 2 months.
+- No money has been invested for this company for 2 months.
 - No lessons were given to us by our teacher this morning.
 
 ## Quy tắc 20: Cấu trúc đảo ngữ với cụm từ trạng từ chỉ nơi chốn
-```
+
 Khi cụm trạng từ chỉ nơi chốn được đặt lên đầu câu, động từ hoà hợp với (cụm) danh từ đứng sau động từ.
-```
+
 **Ví dụ:**
-```
+
 On the top of the hill is a temple. (Trên đỉnh của quả đồi có một ngôi đền đặt ở đó).
-```
 
 ## Quy tắc 21: Sau none of/either of/neither of/one of động từ chia ở dạng số ít
 **Ví dụ:**
 - None of my children has blue eyes.
-
-
-
-
-
-
 

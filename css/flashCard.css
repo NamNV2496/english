@@ -220,9 +220,27 @@ button {
 
 
 
+#read-button {
+    position: absolute;
+    left: 25%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
 
+#read-button.playing::after {
+    content: "\f028"; /* Unicode for speaker icon */
+}
 
+#read-button.stopped::after {
+    content: "\f026"; /* Unicode for pause icon */
+}
 
+/* Assuming you're using Font Awesome for the icons */
+#read-button::after {
+    font-family: "Font Awesome 5 Free";
+}
 
 
 
