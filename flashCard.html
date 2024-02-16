@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English learning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" href="./img/blog/icon/icon.jpg">
+<link rel="stylesheet" href="css/flashCard.css" type="text/css">
+</head>
+
+<body>
+
+    <a href="index.html" id="home-btn"> HOME </a>
+    <div id="tenQuestionDiv">
+        <label for="nameMode">Sequence</label>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input checked type="checkbox" id="mySwitch">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <div id="tenQuestionDiv">
+        <label for="displayMode">Full mode</label>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input checked type="checkbox" id="fullMode">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <div class="flashcard-container">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
+            <button onclick="search()" type="button" id="search-button">Search</button>
+        </div>
+        <div class="flashcard">
+            <div class="front">
+                <span class="example" style="font-weight: bold; font-size: 28px;">Vietnamese Meaning</span>
+                <span class="minor" style="font-size: 24px;">example</span>
+                <span class="minor">mean</span>
+            </div>
+            <div class="back">
+                <span class="english" style="font-weight: bold; font-size: 28px;">English word</span>
+                <span class="minor" style="color: gray;">spelling</span>
+            </div>
+        </div>
+    </div>
+    <button onclick="loadData()" id="next-question-btn">Next Question</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+    <script>
+        const flashcard = document.querySelector('.flashcard');
+        const vietnameseMeaning = document.querySelector('.example');
+        const englishWord = document.querySelector('.english');
+        const englishMinor = document.querySelectorAll('.back .minor')[0];
+        const vietnameseMinor1 = document.querySelectorAll('.front .minor')[0];
+        const vietnameseMinor2 = document.querySelectorAll('.front .minor')[1];
+        var currentCard = 0;
+        const filePath = "./file/flashCard.xlsx";
+        var randomCard = false;
+        var fullMode = true;
+
+        var quizData = [["english", "spelling", "vietnamese", "example", "mean"]];
+        var englishWordValue = "null";
+        var vietnameseMeaningValue = "null";
+        var displayQuestion = [];
+
+        flashcard.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+
+        // Read Excel file
+        function handleFile() {
+            
+            fetch(filePath)
+            .then(response => response.blob())
+            .then(blob => {
+                // Create a File object from the Blob
+                var file = new File([blob], "flashCard.xlsx");
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var data = new Uint8Array(e.target.result);
+                    var workbook = XLSX.read(data, { type: "array" });
+
+                    // Assume the first sheet is the one containing quiz data
+                    var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+
+                    // Convert sheet data to JSON format
+                    quizDataJson = XLSX.utils.sheet_to_json(firstSheet);
+                    console.log("excel data length: " + quizDataJson.length);
+
+                    // Convert quizData to the desired format
+                    for (var i = 0; i < quizDataJson.length; i++) {
+                        var originalRow = quizDataJson[i];
+                        var formattedRow = [
+                            originalRow.english,
+                            originalRow.spelling,
+                            originalRow.vietnamese,
+                            originalRow.example,
+                            originalRow.mean
+                        ];
+                        quizData.push(formattedRow);
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            }).catch(error => console.error("Error fetching the file:", error));
+
+        }
+
+        function loadData() {
+
+            if (displayQuestion.length >= (quizData.length - 1)) {
+                alert("Hết card rồi");
+                window.location.href = 'flashCard.html';
+            }
+            if (randomCard == true) {
+                while ((displayQuestion.length < (quizData.length -1) && displayQuestion.includes(currentCard)) || currentCard == 0) {
+                    currentCard = Math.floor(Math.random() * (quizData.length -1)) + 1;
+                    console.log("loadData currentCard: " + currentCard);
+                }
+            } else {
+                console.log("load consequence");
+                currentCard++;
+            }
+            displayQuestion.push(currentCard);
+
+            console.log("displayQuestion: " + displayQuestion);
+            
+            loadCard(currentCard);
+        }
+
+        function loadCard(currentCard) {
+            // Accessing cell values
+            var current = quizData[currentCard];
+
+            // Update flashcard content
+            if (fullMode == true) {
+                console.log("full mode");
+                englishWord.textContent = current[0];
+            } else {
+                var randomHide = Math.floor(Math.random() * (current[0].length - 3)) + 2;
+                console.log("hide mode: " + randomHide);
+                englishWord.textContent = hideRandomCharacters(current[0], randomHide);
+            }
+            englishMinor.textContent = current[1];
+            vietnameseMeaning.textContent = current[2];
+            vietnameseMinor1.textContent = current[3];
+            vietnameseMinor2.textContent = current[4];
+        }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                search();
+            }
+        }
+
+        function search() {
+                // Get the input element
+            var inputElement = document.getElementById("search-input");
+            
+            // Get the value entered by the user
+            var keyword = inputElement.value.trim();
+            
+            // If the keyword is not empty
+            if (keyword !== "") {
+                console.log("click search with keyword: " + keyword);
+                for (var i = 0; i < quizData.length; i++) {
+                    for (var j = 0; j < quizData[i].length; j++) {
+                        if (quizData[i][j].indexOf(keyword) !== -1) {
+                            loadCard(i);
+                        }
+                    }
+                }
+            }
+        }
+
+        var mySwitch = document.getElementById('mySwitch');
+        mySwitch.addEventListener('change', function() {
+            var labelQuestionNumber = document.querySelector('label[for=nameMode]');
+            labelQuestionNumber.style.fontWeight = 'bold';
+            if (mySwitch.checked == false) {
+                labelQuestionNumber.textContent ="Random";
+                randomCard = true;
+            } else {
+                labelQuestionNumber.textContent = "Sequence";
+                randomCard = false;
+            }
+        });
+
+        var fullModeElement = document.getElementById('fullMode');
+        fullModeElement.addEventListener('change', function() {
+            var labelQuestionNumber = document.querySelector('label[for=displayMode]');
+            labelQuestionNumber.style.fontWeight = 'bold';
+            if (fullModeElement.checked == false) {
+                labelQuestionNumber.textContent ="Hide mode";
+                fullMode = false;
+            } else {
+                labelQuestionNumber.textContent = "Full mode";
+                fullMode = true;
+            }
+        });
+
+        
+        function hideRandomCharacters(str, numToHide) {
+            // Ensure numToHide is within the range of the string length
+            numToHide = Math.min(numToHide, str.length);
+
+            // Create an array of indices to hide
+            let indicesToHide = [];
+            while (indicesToHide.length < numToHide) {
+                let randomIndex = Math.floor(Math.random() * str.length);
+                if (!indicesToHide.includes(randomIndex)) {
+                    indicesToHide.push(randomIndex);
+                }
+            }
+
+            // Replace characters at the randomly chosen indices with asterisks
+            let hiddenString = '';
+            for (let i = 0; i < str.length; i++) {
+                if (indicesToHide.includes(i)) {
+                    hiddenString += '*';
+                } else {
+                    hiddenString += str[i];
+                }
+            }
+            return hiddenString;
+        }
+
+
+
+        handleFile();
+        
+    </script>
+</body>
+</html>

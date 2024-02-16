@@ -1,0 +1,230 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.flashcard-container {
+    width: 600px;
+    max-width: 100%;
+    height: 400px;
+
+    perspective: 1000px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.flashcard {
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.front, .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column; /* Added to display the spans in a column */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.minor {
+    padding-top: 10px;
+    display: block; /* Display the spelling in a new line */
+}
+
+.back {
+    background-color: rgb(255, 251, 246);
+}
+
+.flashcard.flipped .front {
+    transform: rotateY(0deg);
+}
+
+.flashcard.flipped .back {
+    transform: rotateY(180deg);
+}
+
+.controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#next-question-btn {
+    position: absolute;
+    right: 20px;
+}
+
+button {
+    padding-top: 30px;
+    top: 70%;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+@media only screen and (min-width: 991px) {
+    #next-question-btn {
+        position: absolute;
+        right: 30%;
+    }
+    #search-input {
+        width: 300px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    width: 500px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#search-button {
+    padding: 8px 16px;
+    margin-left: 8px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    /* Optional: Hover and Focus styles */
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+
+
+#tenQuestionDiv {
+    text-align: left;
+    margin-top: 10px;
+}
+#tenQuestionDiv #nameMode {
+    margin-top: 5px;
+}
+
+#tenQuestionDiv {
+    position: block;
+    right: 0%;
+}
+
+
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
