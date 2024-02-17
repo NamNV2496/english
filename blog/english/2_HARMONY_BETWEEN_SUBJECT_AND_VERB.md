@@ -87,7 +87,7 @@ People (người), cattle (gia súc), police (cảnh sát), army (quân đội),
 **Ví dụ:**
 -  The blind `are` the people who can't see anything.
 
-## Quy tắc 9: Hai danh từ nối nhau bằng cấu trúc: "either ... or, neither... nor, not only but aslo" thì động từ chia theo chủ ngữ gần nó nhất.
+## Quy tắc 9: Hai danh từ nối nhau bằng cấu trúc: "either ... or, neither... nor, not only... but aslo" thì động từ chia theo chủ ngữ gần nó nhất.
 **Ví dụ:**
 - `Neither` she `nor` her children `were` inherited from the will.
 - `Either` they `or` their son `is` not allowed to come in.
