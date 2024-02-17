@@ -67,6 +67,7 @@
         var randomCard = false;
         var fullMode = true;
         var firstFace = true;
+        var sheetNumber = 0;
 
         var quizData = [["english", "spelling", "vietnamese", "example", "mean"]];
         var englishWordValue = "null";
@@ -78,8 +79,16 @@
             firstFace = !firstFace;
         });
 
+        function getSheetNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const greetingValue = urlParams.get('greeting');
+            sheetNumber = urlParams.get('user');
+        }
+
         // Read Excel file
         function handleFile() {
+
+            console.log("get sheet number: " + sheetNumber);
             
             fetch(filePath)
             .then(response => response.blob())
@@ -92,7 +101,7 @@
                     var workbook = XLSX.read(data, { type: "array" });
 
                     // Assume the first sheet is the one containing quiz data
-                    var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    var firstSheet = workbook.Sheets[workbook.SheetNames[(sheetNumber - 1)]];
 
                     // Convert sheet data to JSON format
                     quizDataJson = XLSX.utils.sheet_to_json(firstSheet);
@@ -120,7 +129,7 @@
 
             if (displayQuestion.length >= (quizData.length - 1)) {
                 alert("Hết card rồi");
-                window.location.href = 'flashCard.html';
+                window.location.href = 'selectUser.html';
             }
             if (randomCard == true) {
                 while ((displayQuestion.length < (quizData.length -1) && displayQuestion.includes(currentCard)) || currentCard == 0) {
@@ -207,6 +216,7 @@
                 labelQuestionNumber.textContent = "Full mode";
                 fullMode = true;
             }
+            loadCard(currentCard);
         });
 
         
@@ -275,6 +285,7 @@
         });
 
 
+        getSheetNumber();
         handleFile();
         
     </script>
