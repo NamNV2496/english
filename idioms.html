@@ -22,6 +22,17 @@
         </label>
     </div>
 
+    
+    <div id="tenQuestionDiv">
+        <label for="displayMode">Full mode</label>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input checked type="checkbox" id="fullMode">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+
     <label for="selectVar">Select speak speed:</label>
     <select id="selectVar">
         <option value="0.5">0.5</option>
@@ -45,6 +56,7 @@
             <div class="back">
                 <span class="english" style="font-weight: bold; font-size: 28px;">English idioms</span>
                 <span class="minor" style="color: gray;">Usage</span>
+                <span class="minor" style="color: black; font-weight: bold">Suggestion meaning when hide mode</span>
             </div>
         </div>
     </div>
@@ -61,6 +73,7 @@
         const vietnameseMeaning = document.querySelector('.example');
         const englishWord = document.querySelector('.english');
         const englishMinor = document.querySelectorAll('.back .minor')[0];
+        const englishMinor2 = document.querySelectorAll('.back .minor')[1];
         const vietnameseMinor1 = document.querySelectorAll('.front .minor')[0];
         const vietnameseMinor2 = document.querySelectorAll('.front .minor')[1];
         var currentCard = 0;
@@ -148,17 +161,21 @@
             // Update flashcard content
             if (fullMode == true) {
                 console.log("full mode");
-                englishWord.textContent = current[0];
+                englishMinor.innerHTML = formatDescription(current[1]);
+                englishMinor2.innerHTML = "";
+                vietnameseMinor1.innerHTML = formatDescription(current[3]);
+                vietnameseMinor2.innerHTML = formatDescription(current[4]);
             } else {
-                var randomHide = Math.floor(Math.random() * (current[0].length - 3)) + 2;
-                console.log("hide mode: " + randomHide);
-                englishWord.textContent = hideRandomCharacters(current[0], randomHide);
+                console.log("learn mode");
+                // hide example
+                vietnameseMinor1.innerHTML = "";
+                vietnameseMinor2.innerHTML = "";
+                englishMinor2.innerHTML = formatDescription(current[3]);
+                englishMinor.innerHTML = formatDescription(current[4]);
             }
             // englishMinor.textContent = current[1];
-            englishMinor.innerHTML = formatDescription(current[1]);
+            englishWord.textContent = current[0];
             vietnameseMeaning.innerHTML = formatDescription(current[2]);
-            vietnameseMinor1.innerHTML = formatDescription(current[3]);
-            vietnameseMinor2.innerHTML = formatDescription(current[4]);
         }
 
         function handleKeyPress(event) {
@@ -208,6 +225,21 @@
             } else {
                 labelQuestionNumber.textContent = "Sequence";
                 randomCard = false;
+            }
+        });
+
+        var fullModeElement = document.getElementById('fullMode');
+        fullModeElement.addEventListener('change', function() {
+            var labelQuestionNumber = document.querySelector('label[for=displayMode]');
+            labelQuestionNumber.style.fontWeight = 'bold';
+            if (fullModeElement.checked == false) {
+                labelQuestionNumber.textContent ="Learn mode";
+                fullMode = false;
+                loadCard(currentCard);
+            } else {
+                labelQuestionNumber.textContent = "Full mode";
+                fullMode = true;
+                loadCard(currentCard);
             }
         });
 

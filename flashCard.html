@@ -156,10 +156,10 @@
             displayQuestion.push(currentCard);
 
             console.log("displayQuestion: " + displayQuestion);
-            loadCard(currentCard, false);
+            loadCard(currentCard);
         }
 
-        function loadCard(currentCard, hide) {
+        function loadCard(currentCard) {
             // Accessing cell values
             var current = quizData[currentCard];
 
@@ -167,15 +167,12 @@
             if (fullMode == true) {
                 console.log("full mode");
                 englishWord.textContent = current[0];
+                englishMinor2.textContent = "";
             } else {
                 var randomHide = Math.floor(Math.random() * (current[0].length - 2)) + 1;
                 console.log("hide mode: " + randomHide);
                 englishWord.textContent = hideRandomCharacters(current[0], randomHide);
-            }
-            if (hide == true) {
                 englishMinor2.textContent = current[2];
-            } else {
-                englishMinor2.textContent = "";
             }
             englishMinor1.textContent = current[1];
             vietnameseMeaning.textContent = current[2];
@@ -230,11 +227,11 @@
             if (fullModeElement.checked == false) {
                 labelQuestionNumber.textContent ="Hide mode";
                 fullMode = false;
-                loadCard(currentCard, true);
+                loadCard(currentCard);
             } else {
                 labelQuestionNumber.textContent = "Full mode";
                 fullMode = true;
-                loadCard(currentCard, false);
+                loadCard(currentCard);
             }
         });
 
