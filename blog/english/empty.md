@@ -19,3 +19,6 @@ Diễn tả một sự việc chắc chắn sẽ xảy ra trong tương lai.
 </span>
 
 ## 3. Dấu hiệu nhận biết:
+
+
+<img src="blog/english/img/4_coordination_of_tenses.png" style="display: block; margin-right: auto; margin-left: auto;">

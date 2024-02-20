@@ -27,6 +27,11 @@
         </label>
       </div>
 
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
+        <button onclick="search()" type="button" id="search-button">Search</button>
+      </div>
+
       <div id="question-container"></div>
       <form id="answers-form">
           <!-- <label>Select your answer:</label><br> -->
@@ -142,23 +147,29 @@
           }).catch(error => console.error("Error fetching the file:", error));
       }
 
-      function loadQuiz() {
+      function loadQuiz(questionId) {
         
-        // console.log("call loadQuiz: " + quizData[currentQuestionIndex]);
+        if (questionId != null) {
+          // Load the question and answers
+          var currentQuestion = quizData[questionId];
+          var questionHTML = "<p> Question " + displayQuestion.length + ": </p><p>" + formatDescription(currentQuestion[0]) + "</p>";
+          questionContainer.innerHTML = questionHTML;
+        } else {
           // Load the question and answers
           var currentQuestion = quizData[currentQuestionIndex];
           var questionHTML = "<p> Question " + displayQuestion.length + ": </p><p>" + formatDescription(currentQuestion[0]) + "</p>";
           questionContainer.innerHTML = questionHTML;
-
-          // Set labels for each radio button
-          for (var i = 1; i <= 4; i++) {
-              var label = document.querySelector(`label[for=option${String.fromCharCode(64 + i)}]`);
-              label.textContent = String.fromCharCode(64 + i) + ". " + currentQuestion[i];
+        }
+        // Set labels for each radio button
+        for (var i = 1; i <= 4; i++) {
+          if (currentQuestion[i] != null) {
+            var label = document.querySelector(`label[for=option${String.fromCharCode(64 + i)}]`);
+            label.textContent = String.fromCharCode(64 + i) + ". " + currentQuestion[i];
           }
-
-          // Enable the "Check Answer" button
-          checkAnswerBtn.disabled = false;
-          checkNextBtn.disabled = true;
+        }
+        // Enable the "Check Answer" button
+        checkAnswerBtn.disabled = false;
+        checkNextBtn.disabled = true;
       }
 
       function checkAnswer() {
@@ -173,6 +184,10 @@
 
           var correctAnswer = quizData[currentQuestionIndex][5];
           var description = quizData[currentQuestionIndex][6];
+          if (correctAnswer == null) {
+            checkNextBtn.disabled = false;
+            return;
+          }
           var formattedDescription = formatDescription(description);
 
           if (selectedAnswer.value === correctAnswer) {
@@ -204,11 +219,13 @@
       }
 
       function formatDescription(description) {
+
+        if (typeof description === 'string') {
           // Split the description by '-' and join with <br> for new lines
           return description.split('-').join('<br>-') // - char
                             .split('*').join('<br>*') // * char
-                            .split('–').join('<br>-') // – char
                             .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
+        }
       }
 
       function updateScore() {
@@ -244,6 +261,35 @@
               window.location.href = 'quizList.html';
           }
       }
+
+      function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                search();
+            }
+        }
+
+      function search() {
+                // Get the input element
+            var inputElement = document.getElementById("search-input");
+            
+            // Get the value entered by the user
+            var keyword = inputElement.value.trim().toLowerCase();
+            
+            // If the keyword is not empty
+            if (keyword !== "") {
+                console.log("click search with keyword: " + keyword);
+                for (var i = 0; i < quizData.length; i++) {
+                  for (var j = 0; j < quizData[i].length; j++) {
+                        if (typeof quizData[i][j] === 'string' && quizData[i][j].toLocaleLowerCase().indexOf(keyword) !== -1) {
+                            loadQuiz(i);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
       // Initial load
         getSheetNumber();
         handleFile();

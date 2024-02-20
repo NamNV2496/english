@@ -49,6 +49,7 @@
                 <span class="example" style="font-weight: bold; font-size: 28px;">Vietnamese Meaning</span>
                 <span class="minor" style="font-size: 24px;">Example</span>
                 <span class="minor" style="color: gray;">Mean</span>
+                <span class="minor" style="color: blue">Antonym</span>
             </div>
             <div class="back">
                 <span class="english" style="font-weight: bold; font-size: 28px;">English word</span>
@@ -62,7 +63,7 @@
     </div>
     <button onclick="loadData()" id="next-question-btn">Next Question</button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script> 
 
     <script>
         const flashcard = document.querySelector('.flashcard');
@@ -72,6 +73,7 @@
         const englishMinor2 = document.querySelectorAll('.back .minor')[1];
         const vietnameseMinor1 = document.querySelectorAll('.front .minor')[0];
         const vietnameseMinor2 = document.querySelectorAll('.front .minor')[1];
+        const vietnameseMinor3 = document.querySelectorAll('.front .minor')[2];
         var currentCard = 0;
         const filePath = "./file/flashCard.xlsx";
         var randomCard = false;
@@ -79,7 +81,7 @@
         var firstFace = true;
         var sheetNumber = 0;
 
-        var quizData = [["english", "spelling", "vietnamese", "example", "mean"]];
+        var quizData = [["english", "spelling", "vietnamese", "example", "mean", "antonym"]];
         var englishWordValue = "null";
         var vietnameseMeaningValue = "null";
         var displayQuestion = [];
@@ -125,7 +127,8 @@
                             originalRow.spelling,
                             originalRow.vietnamese,
                             originalRow.example,
-                            originalRow.mean
+                            originalRow.mean,
+                            originalRow.antonym,
                         ];
                         quizData.push(formattedRow);
                     }
@@ -178,6 +181,7 @@
             vietnameseMeaning.textContent = current[2];
             vietnameseMinor1.textContent = current[3];
             vietnameseMinor2.textContent = current[4];
+            vietnameseMinor3.textContent = "Từ trái nghĩa: " + current[5];
         }
 
         function handleKeyPress(event) {
@@ -198,7 +202,7 @@
                 console.log("click search with keyword: " + keyword);
                 for (var i = 0; i < quizData.length; i++) {
                     for (var j = 0; j < quizData[i].length; j++) {
-                        if (quizData[i][j].toLocaleLowerCase.indexOf(keyword) !== -1) {
+                        if (typeof quizData[i][j] === 'string' && quizData[i][j].toLocaleLowerCase().indexOf(keyword) !== -1) {
                             loadCard(i, false);
                         }
                     }
