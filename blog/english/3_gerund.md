@@ -26,7 +26,9 @@ It was their 25th wedding anniversary last week
 
 ### e. Đứng sau giới từ (in, on, at, with,…) và liên từ (before, after,…)
 
-**Ví dụ:** He had cleaned his bedroom before going out with friends. (Anh ấy đã dọn dẹp phòng ngủ trước khi đi ra ngoài với bạn bè.)
+**Ví dụ:**
+- He had cleaned his bedroom before going out with friends. (Anh ấy đã dọn dẹp phòng ngủ trước khi đi ra ngoài với bạn bè.)
+- My brother is fond `of` pointing out my mistakes. (sau giới từ `of` thì `pointing` đóng vai trò là tân ngữ)
 
 Tuy nhiên, bạn cần lưu ý một số V-ing được dùng như tính từ (interesting, amazing,…) nhưng chúng thực chất không phải là danh động từ. 
 
@@ -45,6 +47,11 @@ Tuy nhiên, bạn cần lưu ý một số V-ing được dùng như tính từ 
 | My hobby is sleeping   | she is sleeping        |
 | G + N -> N ghép  | P = Adj + N        |
 | A wedding ring  | An interesting film        |
+
+**VD:**
+
+- My habit is `sleeping` whenever I’m sad. (`sleeping` ở đây đóng vai trò là danh từ chịu tránh nhiệm làm tân ngữ nên `sleeping` sẽ là G)
+- My sister was cleaning the floor when the telephone rang. (Ở đây `was` được dịch là đang => `cleaning` là P)
 
 ## 3. PERFECT GERUND (danh động từ hoàn thành) và PERFECT PARTICIPLE (phân từ hoàn thành)
 

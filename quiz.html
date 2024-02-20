@@ -27,6 +27,16 @@
         </label>
       </div>
 
+      <div id="tenQuestionDiv">
+        <label for="displayMode">Normal mode</label>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input checked type="checkbox" id="tryhard">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+
       <div class="search-container">
         <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
         <button onclick="search()" type="button" id="search-button">Search</button>
@@ -64,6 +74,7 @@
       var questionNumber = 10;
       var quizData = [["question", "A", "B", "C", "D", "answer", "reason"]];
       var displayQuestion = [];
+      var tryHardMode = false;
 
       var currentQuestionIndex = 1; // Start from the second row (skipping the header)
       var correctCount = 0;
@@ -75,6 +86,22 @@
       var checkNextBtn = document.getElementById("next-question-btn");
       var labelSelectAnswer = document.querySelector('label[for=optionA]');
       var labelCorrectAnswer = document.querySelector('label[for=optionA]');
+
+
+      var fullModeElement = document.getElementById('tryhard');
+        fullModeElement.addEventListener('change', function() {
+            var labelQuestionNumber = document.querySelector('label[for=displayMode]');
+            labelQuestionNumber.style.fontWeight = 'bold';
+            if (fullModeElement.checked == false) {
+                labelQuestionNumber.textContent ="Try hard mode. hide the answer";
+                tryHardMode = true;
+            } else {
+              labelQuestionNumber.textContent ="Normal mode";
+              tryHardMode = false;
+            }
+
+            loadQuiz();
+        });
 
       document.getElementById("excel-file-input").addEventListener("change", handleFile);
 
@@ -166,6 +193,9 @@
             var label = document.querySelector(`label[for=option${String.fromCharCode(64 + i)}]`);
             label.textContent = String.fromCharCode(64 + i) + ". " + currentQuestion[i];
           }
+          if (tryHardMode == true) {
+            label.textContent = "";
+          }
         }
         // Enable the "Check Answer" button
         checkAnswerBtn.disabled = false;
@@ -174,7 +204,7 @@
 
       function checkAnswer() {
           var selectedAnswer = document.querySelector('input[name="answer"]:checked');
-          if (!selectedAnswer) {
+          if (!selectedAnswer && tryHardMode == false) {
               alert("Please select an answer.");
               return;
           }
@@ -190,42 +220,51 @@
           }
           var formattedDescription = formatDescription(description);
 
-          if (selectedAnswer.value === correctAnswer) {
-                descriptionContainer.innerHTML = "Correct! <p></p>" + formattedDescription ;
-                descriptionContainer.className = "correct";
-                correctCount++;
+          if (tryHardMode == false) {
+            if (selectedAnswer != null && selectedAnswer.value === correctAnswer) {
+                  descriptionContainer.innerHTML = "Correct! <p></p>" + formattedDescription ;
+                  descriptionContainer.className = "correct";
+                  correctCount++;
+            } else {
+                  descriptionContainer.innerHTML = "Incorrect. <p></p>" + formattedDescription ;
+                  descriptionContainer.className = "incorrect";
+                  incorrectCount++;
+                  var optionAnswer = document.getElementById('option' + selectedAnswer.value);
+                  labelSelectAnswer = document.querySelector('label[for=option' + selectedAnswer.value +']');
+
+                  if (optionAnswer.checked) {
+                      labelSelectAnswer.style.color = 'red';
+                      labelSelectAnswer.style.fontWeight = 'bold';
+                      labelSelectAnswer.innerHTML += ' ❌';
+                  }
+            }
+            // highlight the correct answer
+
+            var optionAnswer = document.getElementById('option' + correctAnswer);
+            labelCorrectAnswer = document.querySelector('label[for=option' + correctAnswer +']');
+            labelCorrectAnswer.style.color = 'green';
+            labelCorrectAnswer.style.fontWeight = 'bold';
+            labelCorrectAnswer.innerHTML += ' ✔️';
+            updateScore();
           } else {
-                descriptionContainer.innerHTML = "Incorrect. <p></p>" + formattedDescription ;
-                descriptionContainer.className = "incorrect";
-                incorrectCount++;
-                var optionAnswer = document.getElementById('option' + selectedAnswer.value);
-                labelSelectAnswer = document.querySelector('label[for=option' + selectedAnswer.value +']');
-
-                if (optionAnswer.checked) {
-                    labelSelectAnswer.style.color = 'red';
-                    labelSelectAnswer.style.fontWeight = 'bold';
-                    labelSelectAnswer.innerHTML += ' ❌';
-                }
+            descriptionContainer.innerHTML = "Correct! <p></p>" + formattedDescription ;
+            descriptionContainer.style.color = "green";
           }
-          // highlight the correct answer
-          var optionAnswer = document.getElementById('option' + correctAnswer);
-          labelCorrectAnswer = document.querySelector('label[for=option' + correctAnswer +']');
-          labelCorrectAnswer.style.color = 'green';
-          labelCorrectAnswer.style.fontWeight = 'bold';
-          labelCorrectAnswer.innerHTML += ' ✔️';
 
-          updateScore();
+          console.log("ddafadfdasaddfasdsaf")
+
           checkNextBtn.disabled = false;
       }
 
       function formatDescription(description) {
 
-        if (typeof description === 'string') {
+        if (typeof description === 'string' && description != null) {
           // Split the description by '-' and join with <br> for new lines
           return description.split('-').join('<br>-') // - char
                             .split('*').join('<br>*') // * char
                             .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
         }
+        return "";
       }
 
       function updateScore() {
@@ -282,6 +321,12 @@
                   for (var j = 0; j < quizData[i].length; j++) {
                         if (typeof quizData[i][j] === 'string' && quizData[i][j].toLocaleLowerCase().indexOf(keyword) !== -1) {
                             loadQuiz(i);
+                            // update to get correct answer
+                            displayQuestion.pop();
+                            currentQuestionIndex = i;
+                            if (!displayQuestion.includes(currentQuestionIndex)) {
+                              displayQuestion.push(currentQuestionIndex);
+                            }
                         }
                     }
                 }

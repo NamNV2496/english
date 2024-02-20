@@ -141,10 +141,8 @@
             if (randomCard == true) {
                 while ((displayQuestion.length < (quizData.length -1) && displayQuestion.includes(currentCard)) || currentCard == 0) {
                     currentCard = Math.floor(Math.random() * (quizData.length -1)) + 1;
-                    console.log("loadData currentCard: " + currentCard);
                 }
             } else {
-                console.log("load consequence");
                 currentCard++;
             }
             displayQuestion.push(currentCard);
@@ -160,7 +158,6 @@
 
             // Update flashcard content
             if (fullMode == true) {
-                console.log("full mode");
                 englishMinor.innerHTML = formatDescription(current[1]);
                 englishMinor2.innerHTML = "";
                 vietnameseMinor1.innerHTML = formatDescription(current[3]);
@@ -206,13 +203,14 @@
 
         function formatDescription(description) {
             // Split the description by '-' and join with <br> for new lines
-            if (typeof description === 'string') {
+            if (typeof description === 'string' && description != null) {
 
                 return description.split("-").join("<br>-") // - char
-                .split('*').join('<br>*') // * char
-                .split('–').join('<br>-') // – char
-                .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
+                    .split('*').join('<br>*') // * char
+                    .split('–').join('<br>-') // – char
+                    .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
             }
+            return "";
         }
 
         var mySwitch = document.getElementById('mySwitch');
