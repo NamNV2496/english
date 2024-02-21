@@ -1,6 +1,6 @@
 # Sự phối thì
 
-## 1. WHEN
+## 1. WHEN (khi)
 
 Cấu trúc When thường được sử dụng để nói về một hành động đơn lẻ, xảy ra trong thời gian rất ngắn, thường chia ở thì quá khứ đơn hoặc hiện tại đơn.
 - Quá khứ
@@ -26,19 +26,19 @@ Diễn tả các hành đông
 
 <img src="blog/english/img/4_coordination_of_tenses_3.png" style="display: block; margin-right: auto; margin-left: auto;">
 
-## 5. AT THIS/ THAT TIME
+## 5. AT THIS/ THAT TIME (vào lúc)
 
 <img src="blog/english/img/4_coordination_of_tenses_4.png" style="display: block; margin-right: auto; margin-left: auto;">
 
-## 6. BY THE TIME (vào lúc) cho tới lúc, cho tới khi
+## 6. BY THE TIME cho tới lúc, cho tới khi
 
 <img src="blog/english/img/4_coordination_of_tenses_5.png" style="display: block; margin-right: auto; margin-left: auto;">
 
-## 7. AFTER
+## 7. AFTER (sau khi)
 
 <img src="blog/english/img/4_coordination_of_tenses_6.png" style="display: block; margin-right: auto; margin-left: auto;">
 
-## 8. BEFORE
+## 8. BEFORE (Trước khi)
 
 <img src="blog/english/img/4_coordination_of_tenses_7.png" style="display: block; margin-right: auto; margin-left: auto;">
 

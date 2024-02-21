@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English learning</title>
+    <title>English writing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="./img/blog/icon/icon.jpg">
     <link rel="stylesheet" href="css/flashCard.css" type="text/css">
@@ -22,41 +22,20 @@
         </label>
     </div>
 
-    
-    <div id="tenQuestionDiv">
-        <label for="displayMode">Full mode</label>
-        <!-- Rounded switch -->
-        <label class="switch">
-            <input checked type="checkbox" id="fullMode">
-            <span class="slider round"></span>
-        </label>
-    </div>
-
-
-    <label for="selectVar">Select speak speed:</label>
-    <select id="selectVar">
-        <option value="0.5">0.5</option>
-        <option value="1" selected>1.0</option>
-        <option value="1.5">1.5</option>
-        <option value="2">2</option>
-    </select>
-
-
     <div class="flashcard-container">
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
             <button onclick="search()" type="button" id="search-button">Search</button>
         </div>
         <div class="flashcard">
-            <div class="front">
-                <span class="example" style="font-weight: bold; font-size: 32px;">Vietnamese Meaning</span>
-                <span class="minor" style="font-size: 24px;">Example</span>
-                <span class="minor" style="color: gray;">Mean</span>
-            </div>
             <div class="back">
                 <span class="english" style="font-weight: bold; font-size: 28px;">English idioms</span>
-                <span class="minor" style="color: gray;">Usage</span>
                 <span class="minor" style="color: black; font-weight: bold">Suggestion meaning when hide mode</span>
+                <div class="hidden">
+                    <input type="text" id="wordInput" placeholder="Type here..." onkeypress="handleInputKeyPress(event)">
+                    <button onclick="checkWord()">Check</button>
+                    <div class="textResult">Result</div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,27 +49,19 @@
 
     <script>
         const flashcard = document.querySelector('.flashcard');
-        const vietnameseMeaning = document.querySelector('.example');
         const englishWord = document.querySelector('.english');
         const englishMinor = document.querySelectorAll('.back .minor')[0];
-        const englishMinor2 = document.querySelectorAll('.back .minor')[1];
-        const vietnameseMinor1 = document.querySelectorAll('.front .minor')[0];
-        const vietnameseMinor2 = document.querySelectorAll('.front .minor')[1];
+        const textResult = document.querySelector('.back .textResult');
         var currentCard = 0;
-        const filePath = "./file/idioms.xlsx";
+        const filePath = "./file/writing.xlsx";
         var randomCard = false;
-        var fullMode = true;
-        var firstFace = true;
+        var wordToCheck = "";
+        var explain = "";
 
-        var quizData = [["english", "usage", "vietnamese", "example", "mean"]];
+        var quizData = [["topic", "answer", "explain"]];
         var englishWordValue = "null";
         var vietnameseMeaningValue = "null";
         var displayQuestion = [];
-
-        flashcard.addEventListener('click', function() {
-            this.classList.toggle('flipped');
-            firstFace = !firstFace;
-        });
 
         // Read Excel file
         function handleFile() {
@@ -99,7 +70,7 @@
             .then(response => response.blob())
             .then(blob => {
                 // Create a File object from the Blob
-                var file = new File([blob], "idioms.xlsx");
+                var file = new File([blob], "writing.xlsx");
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var data = new Uint8Array(e.target.result);
@@ -116,11 +87,9 @@
                     for (var i = 0; i < quizDataJson.length; i++) {
                         var originalRow = quizDataJson[i];
                         var formattedRow = [
-                            originalRow.english,
-                            originalRow.usage,
-                            originalRow.vietnamese,
-                            originalRow.example,
-                            originalRow.mean
+                            originalRow.topic,
+                            originalRow.answer,
+                            originalRow.explain
                         ];
                         quizData.push(formattedRow);
                     }
@@ -134,43 +103,30 @@
 
             if (displayQuestion.length >= (quizData.length - 1)) {
                 alert("Hết card rồi");
-                window.location.href = 'idioms.html';
+                window.location.href = 'writing.html';
             }
-            if (randomCard == true) {
-                while ((displayQuestion.length < (quizData.length -1) && displayQuestion.includes(currentCard)) || currentCard == 0) {
-                    currentCard = Math.floor(Math.random() * (quizData.length -1)) + 1;
-                }
-            } else {
-                currentCard++;
+            while ((displayQuestion.length < (quizData.length -1) && displayQuestion.includes(currentCard)) || currentCard == 0) {
+                currentCard = Math.floor(Math.random() * (quizData.length -1)) + 1;
             }
             displayQuestion.push(currentCard);
 
             console.log("displayQuestion: " + displayQuestion);
             
             loadCard(currentCard);
+            showInputTextBox();
         }
 
         function loadCard(currentCard) {
             // Accessing cell values
             var current = quizData[currentCard];
 
-            // Update flashcard content
-            if (fullMode == true) {
-                englishMinor.innerHTML = formatDescription(current[1]);
-                englishMinor2.innerHTML = "";
-                vietnameseMinor1.innerHTML = formatDescription(current[3]);
-                vietnameseMinor2.innerHTML = formatDescription(current[4]);
-            } else {
-                console.log("learn mode");
-                // hide example
-                vietnameseMinor1.innerHTML = "";
-                vietnameseMinor2.innerHTML = "";
-                englishMinor2.innerHTML = formatDescription(current[3]);
-                englishMinor.innerHTML = formatDescription(current[4]);
-            }
-            // englishMinor.textContent = current[1];
-            englishWord.textContent = current[0];
-            vietnameseMeaning.innerHTML = formatDescription(current[2]);
+            textResult.textContent = "";
+            clearWordInput();
+            
+            englishWord.innerHTML = formatDescription(current[0]);
+            englishMinor.innerHTML = "";
+            wordToCheck = current[1];
+            explain = current[2];
         }
 
         function handleKeyPress(event) {
@@ -206,6 +162,7 @@
                 return description.split("-").join("<br>-") // - char
                     .split('*').join('<br>*') // * char
                     .split('–').join('<br>-') // – char
+                    .split('→').join('<br>->') // – char
                     .replace(/\n=>/g, '<br>=>'); // newline + '=>' char
             }
             return "";
@@ -224,47 +181,50 @@
             }
         });
 
-        var fullModeElement = document.getElementById('fullMode');
-        fullModeElement.addEventListener('change', function() {
-            var labelQuestionNumber = document.querySelector('label[for=displayMode]');
-            labelQuestionNumber.style.fontWeight = 'bold';
-            if (fullModeElement.checked == false) {
-                labelQuestionNumber.textContent ="Learn mode";
-                fullMode = false;
-                loadCard(currentCard);
-            } else {
-                labelQuestionNumber.textContent = "Full mode";
-                fullMode = true;
-                loadCard(currentCard);
+
+        
+        function handleInputKeyPress(event) {
+            if (event.keyCode === 13) {
+                checkWord();
             }
-        });
+        }
+
+        function showInputTextBox() {
+            document.querySelector('.hidden').style.display = 'block';
+        }
+
+        function checkWord() {
+
+            var inputText = document.getElementById("wordInput").value.trim();
+        
+            if (inputText.toLowerCase() === wordToCheck) {
+                textResult.innerHTML = "Correct!<br><br><br> Đáp án: <br>" + formatDescription(wordToCheck) + "<br><br>Giải thích" + formatDescription(explain);
+                textResult.style.color = "green";
+            } else {
+                textResult.innerHTML = "Incorrect word. Please try again!<br><br><br>Đáp án: <br>" + formatDescription(wordToCheck) + "<br><br>Giải thích" +  formatDescription(explain);
+                textResult.style.color = "red";
+            }
+        }
+
+        function clearWordInput() {
+            document.getElementById('wordInput').value = '';
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             // Get reference to the button and the select element
             var readButton = document.getElementById('read-button');
-            var selectVar = document.getElementById('selectVar');
 
             // Add click event listener to the button
             readButton.addEventListener('click', function() {
                 // Read the current value of the element with class 'english'
-                var englishWord = document.querySelector('.english').textContent;
-                var exampleSentence = document.querySelectorAll('.front .minor')[0].textContent;
 
                 // Create a new SpeechSynthesisUtterance object
                 var speech = new SpeechSynthesisUtterance();
 
                 // Set the text to be read
-                if (firstFace == true) {
-                    speech.text = englishWord;
-                } else {
-                    speech.text = exampleSentence;
-                }
 
-                // Get the selected value from the combo box (speech rate)
-                var selectedValue = parseFloat(selectVar.value);
-                
-                // Set the speech rate
-                speech.rate = selectedValue;
+                speech.text = wordToCheck;
+
 
                 // Use the default voice
                 speech.lang = 'en-US';
