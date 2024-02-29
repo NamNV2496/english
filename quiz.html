@@ -37,7 +37,10 @@
     </div>
 
 
+
       <div class="search-container">
+
+        <div id="timer">30</div>
         <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
         <button onclick="search()" type="button" id="search-button">Search</button>
       </div>
@@ -299,6 +302,11 @@
               // back to home page
               window.location.href = 'quizList.html';
           }
+
+          resetTimeOut();
+          updateTimer();
+          // Restart the timer
+          startTimer();
       }
 
       function handleKeyPress(event) {
@@ -334,10 +342,44 @@
         }
 
 
+        let timeLeft = 30;
+        const maxTime = 30;
+        let timerInterval;
+
+        function updateTimer() {
+          document.getElementById('timer').innerText = timeLeft;
+        }
+
+        function decrementTimer() {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateTimer();
+          } else {
+            // if it timeouts, update that sentence to fail
+            incorrectCount++;
+            clearInterval(timerInterval);
+            loadNextQuestion();
+          }
+        }
+
+        function setTimeTo0() {
+          timeLeft = 0;
+        }
+
+        function resetTimeOut() {
+          timeLeft = 30;
+          clearInterval(timerInterval);
+        }
+
+        function startTimer() {
+          timerInterval = setInterval(decrementTimer, 1000);
+        }
+
 
       // Initial load
         getSheetNumber();
         handleFile();
+        startTimer();
   </script>
 
 </body>
